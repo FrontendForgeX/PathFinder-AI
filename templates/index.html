@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="PathFinder helps students discover relevant hackathons, challenges, and competitions.">
+  <title>PathFinder — Find what moves you forward</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="identity" href="/" aria-label="PathFinder home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.7" opacity=".55"/><path d="m30.8 16.6-5.7 13.2-8 2.7 5.7-13.2 8-2.7Z" fill="currentColor"/><circle cx="24" cy="24" r="2.1" fill="#f5f4ef"/></svg>
+      </span>
+      <span class="brand-name">pathfinder<span class="brand-dot">.</span><small>OPPORTUNITY INTELLIGENCE</small></span>
+    </a>
+    <div class="side-label">WORKSPACE</div>
+    <nav aria-label="Primary navigation">
+      <button class="nav-item active" id="discover" type="button"><span class="nav-symbol">◈</span> Discover <span class="nav-arrow">↗</span></button>
+      <button class="nav-item" id="saved" type="button"><span class="nav-symbol">▤</span> Reading list <span id="savedCount" class="nav-count">0</span></button>
+    </nav>
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-note"><span class="small-circle"></span><span>Built for curious students.<br>Powered by real search data.</span></div>
+    <div class="sidebar-footer">PATHFINDER / 2026<br>Made to explore.</div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar"><span class="breadcrumb">Workspace <span>/</span> Discover</span><div class="topbar-right"><span class="topbar-pulse"></span> Research workspace <span class="topbar-divider"></span> <span id="today"></span></div></div>
+
+    <section class="hero" aria-labelledby="headline">
+      <div class="hero-text"><div class="kicker"><span class="kicker-line"></span> LESS SCROLLING, MORE BUILDING</div><h1 id="headline">The next big thing<br>starts <span class="underlined">somewhere.</span></h1><p>Find hackathons, competitions and ideas worth your time. Matched to your skills, not the noise.</p><a href="#searchPanel" class="hero-link">Start exploring <span>↗</span></a></div>
+      <div class="hero-graphic" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="hero-cross cross-a">+</div><div class="hero-cross cross-b">+</div><div class="graphic-center"><span>N</span><div class="needle"></div><span>S</span></div><div class="graphic-caption">YOUR NEXT COORDINATE<br>IS OUT THERE</div></div>
+    </section>
+
+    <section class="search-panel" id="searchPanel">
+      <div class="section-heading"><div><span class="section-number">01 / DISCOVERY</span><h2>Make it yours.</h2><p>Tell us what you're working with. We'll find the right places to start.</p></div><span class="section-aside">STUDENT PROFILE ↘</span></div>
+      <form id="profile"><div class="form-grid">
+        <label>YOUR BRANCH<input name="branch" value="ECE" maxlength="150" required autocomplete="off"></label>
+        <label>YEAR OF STUDY<input name="year" value="2" maxlength="30" required autocomplete="off"></label>
+        <label>SKILLS<input name="skills" value="Python, C, HTML, CSS" maxlength="150" required autocomplete="off"></label>
+        <label>WHAT YOU'RE INTO<input name="interests" value="AI, IoT" maxlength="150" required autocomplete="off"></label>
+        <label>LOCATION<input name="location" value="Andhra Pradesh" maxlength="150" required autocomplete="off"></label>
+      </div><div class="form-bottom"><button class="action-primary" id="run" type="submit"><span class="button-icon">↗</span><span>Explore opportunities</span><span class="button-arrow">→</span></button><button class="action-ghost" id="refresh" type="button">↻ Refresh from web</button><span class="form-hint">Fresh search consumes SerpApi credits.</span></div></form>
+    </section>
+
+    <section class="numbers" aria-label="Search overview"><div class="number"><span class="number-label">MATCHES FOUND</span><strong id="count">—</strong><span class="number-foot">Based on your profile</span></div><div class="number"><span class="number-label">UPCOMING / ONGOING</span><strong id="current">—</strong><span class="number-foot">Date-based estimates</span></div><div class="number"><span class="number-label">RESEARCH SOURCE</span><strong class="number-source" id="source">READY</strong><span class="number-foot">Source shown after searching</span></div></section>
+
+    <section class="discover-section" id="discoverSection"><div class="section-heading result-heading"><div><span class="section-number">02 / RESULTS</span><h2 id="sectionTitle">Your discoveries<span class="orange-period">.</span></h2><p id="resultsCaption">A considered shortlist of opportunities for your next move.</p></div><span class="section-aside">CURATED FOR YOU ↘</span></div>
+      <div class="toolbar"><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="keyword" type="search" placeholder="Search results by name or source" aria-label="Search results"></div><label class="select-wrap"><span class="sr-only">Filter by status</span><select id="status"><option value="ALL">All statuses</option><option>UPCOMING</option><option>ONGOING</option><option>ENDED</option><option>UNKNOWN</option></select></label><label class="select-wrap"><span class="sr-only">Sort results</span><select id="sort"><option value="score">Best match</option><option value="name">Name A–Z</option><option value="status">Active first</option></select></label><div class="view-switch" aria-label="Results layout"><button id="gridView" class="selected" type="button" title="Grid view" aria-label="Grid view">▦</button><button id="listView" type="button" title="List view" aria-label="List view">☰</button></div></div>
+      <div id="notice" class="notice" role="status" aria-live="polite"><span class="notice-icon">↗</span><span>Ready when you are. Enter a profile above and start exploring.</span></div>
+      <div id="results" class="results-grid"></div>
+    </section>
+    <footer class="footer"><div><strong>pathfinder<span>.</span></strong> <span>Make your next move count.</span></div><p>Event details are estimates. Always verify dates and registration on the organizer's website.</p></footer>
+  </main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
